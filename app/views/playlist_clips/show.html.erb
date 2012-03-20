@@ -1,0 +1,22 @@
+<h1>/Playlist Clip</h1>
+
+<p>
+  <b>Position</b><br>
+  <%= @playlist_clip.position %>
+</p>
+
+<p>
+  <b>Clip</b><br>
+  <%= @playlist_clip.clip_id %>
+</p>
+
+<p>
+  <b>Playlist</b><br>
+  <%= @playlist_clip.playlist_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', playlist_clips_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_playlist_clip_path(@playlist_clip), :class => 'btn' %>
+  <%= link_to 'Delete', playlist_clip_path(@playlist_clip), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

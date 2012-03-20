@@ -1,0 +1,22 @@
+<h1>/Clip</h1>
+
+<p>
+  <b>Filename</b><br>
+  <%= @clip.filename %>
+</p>
+
+<p>
+  <b>Subtitle</b><br>
+  <%= @clip.subtitle %>
+</p>
+
+<p>
+  <b>Movie</b><br>
+  <%= @clip.movie_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', clips_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_clip_path(@clip), :class => 'btn' %>
+  <%= link_to 'Delete', clip_path(@clip), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

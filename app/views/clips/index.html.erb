@@ -1,0 +1,26 @@
+<h1>Clips</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Filename</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clips.each do |clip| %>
+      <tr>
+        <td><%= clip.id %></td>
+        <td><%= link_to clip.filename, clip_path(clip) %></td>
+        <td><%= clip.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_clip_path(clip), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', clip_path(clip), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_clip_path, :class => 'btn btn-primary' %>

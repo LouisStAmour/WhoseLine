@@ -1,0 +1,17 @@
+<h1>/Movie</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @movie.name %>
+</p>
+
+<p>
+  <b>Poster</b><br>
+  <%= @movie.poster %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', movies_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_movie_path(@movie), :class => 'btn' %>
+  <%= link_to 'Delete', movie_path(@movie), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

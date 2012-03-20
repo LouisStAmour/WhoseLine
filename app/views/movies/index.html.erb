@@ -1,0 +1,26 @@
+<h1>Movies</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.id %></td>
+        <td><%= link_to movie.name, movie_path(movie) %></td>
+        <td><%= movie.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_movie_path(movie), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', movie_path(movie), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_movie_path, :class => 'btn btn-primary' %>

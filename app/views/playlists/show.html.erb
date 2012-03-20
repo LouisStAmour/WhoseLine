@@ -1,0 +1,12 @@
+<h1>/Playlist</h1>
+
+<p>
+  <b>User</b><br>
+  <%= @playlist.user_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', playlists_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_playlist_path(@playlist), :class => 'btn' %>
+  <%= link_to 'Delete', playlist_path(@playlist), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>
