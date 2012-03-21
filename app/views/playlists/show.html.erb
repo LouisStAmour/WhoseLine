@@ -5,6 +5,14 @@
   <%= @playlist.user_id %>
 </p>
 
+<%= form_for PlaylistClip.new(:playlist => @playlist), :html => { :class => 'well form-search' } do |f| %>
+
+        <%= f.text_field :clip_id, :class => 'search_field', :data => { :autocomplete_source => clips_path(:format => 'json') } %>
+    <%= f.hidden_field :playlist_id %>
+
+      <%= f.submit "Add", :class => 'btn btn-primary' %>
+<% end %>
+
 <ul id="pc" data-update-url="<%= sort_playlist_clips_url %>">
 	<% @playlist.playlist_clips.each do |pc| %>
   <%= content_tag_for :li, pc do %>

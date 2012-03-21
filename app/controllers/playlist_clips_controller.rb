@@ -44,7 +44,7 @@ class PlaylistClipsController < ApplicationController
 
     respond_to do |format|
       if @playlist_clip.save
-        format.html { redirect_to @playlist_clip, notice: 'Playlist clip was successfully created.' }
+        format.html { redirect_to @playlist_clip.playlist, notice: 'Playlist clip was successfully created.' }
         format.json { render json: @playlist_clip, status: :created, location: @playlist_clip }
       else
         format.html { render action: "new" }
@@ -82,8 +82,8 @@ class PlaylistClipsController < ApplicationController
   end
   
   def sort
-    params[:pc].each_with_index do |id, index|
-      Faq.update_all({position: index+1}, {id: id})
+    params[:playlist_clip].each_with_index do |id, index|
+      PlaylistClip.update_all({position: index+1}, {id: id})
     end
     render nothing: true
   end

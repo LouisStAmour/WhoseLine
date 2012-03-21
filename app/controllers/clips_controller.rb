@@ -2,11 +2,15 @@ class ClipsController < ApplicationController
   # GET /clips
   # GET /clips.json
   def index
-    @clips = Clip.order(:start_ms).all
+    if params[:term]
+      @clips = Clip.order(:start_ms).where("subtitle like ?", "%#{params[:term]}%")
+    else
+      @clips = Clip.order(:start_ms).all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @clips }
+      format.json { render json: @clips.map {|c| { :label => c.subtitle,  :value => c.id }  } }
     end
   end
 
