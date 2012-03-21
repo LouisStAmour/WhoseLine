@@ -23,6 +23,20 @@
       </div>
     </div>
 
+    <div class="control-group">
+      <%= f.label :start_ms, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :start_ms, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :end_ms, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :end_ms, :class => 'number_field' %>
+      </div>
+    </div>
+
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to 'Cancel', clips_path, :class => 'btn' %>

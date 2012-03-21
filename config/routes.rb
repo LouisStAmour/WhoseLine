@@ -1,7 +1,9 @@
 WhoseLine::Application.routes.draw do
   resources :users
 
-  resources :playlist_clips
+  resources :playlist_clips do
+    collection { post :sort }
+  end
 
   resources :playlists
 

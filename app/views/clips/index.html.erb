@@ -3,8 +3,9 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Filename</th>
-      <th>Created at</th>
+	  <th>Start ms</th>
+      <th>Subtitle</th>
+      <th>Movie</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -12,8 +13,9 @@
     <% @clips.each do |clip| %>
       <tr>
         <td><%= clip.id %></td>
-        <td><%= link_to clip.filename, clip_path(clip) %></td>
-        <td><%= clip.created_at %></td>
+		<td><%= clip.start_ms %></td>
+        <td><%= link_to clip.subtitle, clip_path(clip) %></td>
+        <td><%= link_to clip.movie.name, movie_path(clip.movie) %></td>
         <td>
           <%= link_to 'Edit', edit_clip_path(clip), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', clip_path(clip), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>

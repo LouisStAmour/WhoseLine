@@ -15,6 +15,16 @@
   <%= @clip.movie_id %>
 </p>
 
+<p>
+  <b>Start ms</b><br>
+  <%= @clip.start_ms %>
+</p>
+
+<p>
+  <b>End ms</b><br>
+  <%= @clip.end_ms %>
+</p>
+
 <div class="form-actions">
   <%= link_to 'Back', clips_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_clip_path(@clip), :class => 'btn' %>

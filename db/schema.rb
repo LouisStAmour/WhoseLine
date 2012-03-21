@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320202717) do
+ActiveRecord::Schema.define(:version => 20120321170010) do
 
   create_table "clips", :force => true do |t|
     t.string   "filename"
@@ -19,9 +19,13 @@ ActiveRecord::Schema.define(:version => 20120320202717) do
     t.integer  "movie_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "start_ms"
+    t.integer  "end_ms"
   end
 
-  add_index "clips", ["movie_id"], :name => "index_clips_on_movie_id", :unique => true
+  add_index "clips", ["end_ms"], :name => "index_clips_on_end_ms"
+  add_index "clips", ["movie_id"], :name => "index_clips_on_movie_id"
+  add_index "clips", ["start_ms"], :name => "index_clips_on_start_ms"
 
   create_table "movies", :force => true do |t|
     t.string   "name"

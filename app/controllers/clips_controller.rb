@@ -2,7 +2,7 @@ class ClipsController < ApplicationController
   # GET /clips
   # GET /clips.json
   def index
-    @clips = Clip.all
+    @clips = Clip.order(:start_ms).all
 
     respond_to do |format|
       format.html # index.html.erb

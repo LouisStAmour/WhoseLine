@@ -5,6 +5,14 @@
   <%= @playlist.user_id %>
 </p>
 
+<ul id="pc" data-update-url="<%= sort_playlist_clips_url %>">
+	<% @playlist.playlist_clips.each do |pc| %>
+  <%= content_tag_for :li, pc do %>
+    <%= pc.clip.subtitle %>
+  <% end %>
+<% end %>
+</ul>
+
 <div class="form-actions">
   <%= link_to 'Back', playlists_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_playlist_path(@playlist), :class => 'btn' %>
