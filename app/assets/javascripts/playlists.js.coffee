@@ -9,3 +9,22 @@ jQuery ->
   
 	$('#playlist_clip_clip_id').autocomplete
 	  source: $('#playlist_clip_clip_id').data('autocomplete-source')
+	
+	jwplayer("mediaplayer").setup(
+		"flashplayer": "/assets/player.swf"
+		"playlist.position": "none"
+		"controlbar.position": "none"
+		"playlist.size": 270
+		"logo.over": 0
+		"logo.out": 0
+		'repeat': 'list'
+	)
+	
+	$("#loadPlaylistButton").click ->
+		playlist = [] # jwplayer().getPlaylist()
+		$('#pc li').each ->
+			playlist.push( 
+				file: '/'+$(this).data('filename')
+				title: $(this).text().trim()
+			)
+		jwplayer().load(playlist)

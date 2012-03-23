@@ -15,11 +15,14 @@
 
 <ul id="pc" data-update-url="<%= sort_playlist_clips_url %>">
 	<% @playlist.playlist_clips.each do |pc| %>
-  <%= content_tag_for :li, pc do %>
+  <%= content_tag_for :li, pc, :data => { 'filename' => pc.clip.filename } do %>
     <%= pc.clip.subtitle %>
   <% end %>
 <% end %>
 </ul>
+
+<button id="loadPlaylistButton">Load Playlist</button>
+<div id="mediaplayer">JW Player goes here.</div>
 
 <div class="form-actions">
   <%= link_to 'Back', playlists_path, :class => 'btn'  %>
