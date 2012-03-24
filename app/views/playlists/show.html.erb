@@ -1,3 +1,6 @@
+<div class="row">
+	   <div class="span6">
+		   
 <h1>/Playlist</h1>
 
 <p>
@@ -21,11 +24,17 @@
 <% end %>
 </ul>
 
-<button id="loadPlaylistButton">Load Playlist</button>
-<div id="mediaplayer">JW Player goes here.</div>
-
 <div class="form-actions">
   <%= link_to 'Back', playlists_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_playlist_path(@playlist), :class => 'btn' %>
   <%= link_to 'Delete', playlist_path(@playlist), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <a href="#" id="loadPlaylistButton" class="btn">Load Playlist</a>
+</div>
+
+</div>
+	   <div class="span6">
+
+<div id="mediaplayer">JW Player goes here.</div>
+
+</div>
 </div>
