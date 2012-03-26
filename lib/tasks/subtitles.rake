@@ -32,8 +32,8 @@ end
 
 def process_subtitle(sub, m, num_subs)
   movie_file = ENV['MOVIE'] || 'Sintel 2010 720p DM x264-EbP.mkv'
-  ss_offset = ENV['SS_OFFSET'] || -1000
-  t_offset = ENV['T_OFFSET'] || 500
+  ss_offset = (ENV['SS_OFFSET'] || -1000).to_i
+  t_offset = (ENV['T_OFFSET'] || 500).to_i
   
   puts "Encoding #{sub[:sub_no]} of #{num_subs}: #{sub[:lines].join(' | ')}"
   ss = (sub[:start_ms]+ss_offset)
@@ -42,7 +42,7 @@ def process_subtitle(sub, m, num_subs)
   t = 0 if t < 0
   FileUtils.mkdir_p "public/clips/#{m.id}"
   filename = "clips/#{m.id}/#{sub[:sub_no]}.mp4"
-  `ffmpeg -i '#{movie_file}' -ss #{ss/1000.0} -t #{t/1000.0} -strict -2 -vcodec libx264 -ac 2 -acodec aac -y 'public/#{filename}'`
+  `ffmpeg -i '#{movie_file}' -ss #{ss/1000.0} -t #{t/1000.0} -strict -2 -loglevel panic -vcodec libx264 -ac 2 -acodec aac -y 'public/#{filename}'`
   m.clips.create(:filename => '/'+filename, 
                 :subtitle => sub[:lines].join(' '), 
                 :start_ms => ss,
@@ -53,7 +53,8 @@ namespace :movie do
   desc "Load a subtitle file as a new movie, takes SRT, MOVIE env vars with optional SS_OFFSET, T_OFFSET and SUB_NUM."
   task :from_srt => :environment do
     srt_file = ENV['SRT'] || 'Sintel 2010 720p DM x264-EbP.srt'
-    sub_num = ENV['SUB_NUM'] || -1
+    sub_num = (ENV['SUB_NUM'] || -1).to_i
+    to_sub_num = (ENV['TO_SUB_NUM'] || -1).to_i
     
     m = Movie.find_or_create_by_name(File.basename(srt_file, '.*'))
 
@@ -62,7 +63,10 @@ namespace :movie do
       m.clips.clear
       subtitles.each { |sub| process_subtitle(sub, m, subtitles.length) }
     else
-      process_subtitle(subtitles[sub_num], m, 1)
+      subset = subtitles[sub_num-1..to_sub_num]
+      subset.each do |sub|
+        process_subtitle(sub, m, subtitles.length)
+      end
     end
   end
 end
