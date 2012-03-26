@@ -40,11 +40,11 @@ def process_subtitle(sub, m, num_subs)
   t = (sub[:end_ms]-sub[:start_ms]+t_offset)
   ss = 0 if ss < 0
   t = 0 if t < 0
-  FileUtils.mkdir_p "lib/assets/clips/#{m.id}"
-  filename = "lib/assets/clips/#{m.id}/#{sub[:sub_no]}.mp4"
-  `ffmpeg -i '#{movie_file}' -ss #{ss/1000.0} -t #{t/1000.0} -strict -2 -vcodec libx264 -ac 2 -acodec aac -y '#{filename}'`
-  m.clips.create(:filename => filename, 
-                :subtitle => sub[:lines].join(' | '), 
+  FileUtils.mkdir_p "public/clips/#{m.id}"
+  filename = "clips/#{m.id}/#{sub[:sub_no]}.mp4"
+  `ffmpeg -i '#{movie_file}' -ss #{ss/1000.0} -t #{t/1000.0} -strict -2 -vcodec libx264 -ac 2 -acodec aac -y 'public/#{filename}'`
+  m.clips.create(:filename => '/'+filename, 
+                :subtitle => sub[:lines].join(' '), 
                 :start_ms => ss,
                 :end_ms => t)
 end
