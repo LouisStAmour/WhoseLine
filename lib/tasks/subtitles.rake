@@ -42,7 +42,7 @@ def process_subtitle(sub, m, num_subs)
   t = 0 if t < 0
   FileUtils.mkdir_p "public/clips/#{m.id}"
   filename = "clips/#{m.id}/#{sub[:sub_no]}.mp4"
-  `ffmpeg -i '#{movie_file}' -ss #{ss/1000.0} -t #{t/1000.0} -strict -2 -loglevel panic -vcodec libx264 -ac 2 -acodec aac -y 'public/#{filename}'`
+  `ffmpeg -ss #{ss/1000.0} -t #{t/1000.0} -i '#{movie_file}' -strict -2 -loglevel panic -vcodec libx264 -ac 2 -acodec aac -y 'public/#{filename}'`
   m.clips.create(:filename => '/'+filename, 
                 :subtitle => sub[:lines].join(' '), 
                 :start_ms => ss,
